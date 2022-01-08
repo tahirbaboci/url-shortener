@@ -1,6 +1,4 @@
 package com.baboci.urlshortener
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -82,20 +80,16 @@ object IDConverter {
         for (element in uniqueID) {
             base62Number.add(element)
         }
-        println("base62: $base62Number")
         return convertBase62ToBase10ID(base62Number)
     }
 
     private fun convertBase62ToBase10ID(ids: List<Char>): Long {
         var id = 0.0
-        var exp = ids.size - 1
+        val exp = ids.size - 1
         for (element in ids) {
             val base10 = charToIndexTable?.get(element)
-            println("charToIndexTable : $charToIndexTable")
-            println("base10 : $base10")
             id += (base10!! * 62.0.pow(exp.toDouble()))
         }
-        println("id: $id")
         return id.toLong()
     }
 }

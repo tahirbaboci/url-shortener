@@ -14,6 +14,7 @@ import javax.validation.Valid
 
 @RestController
 class UrlShortenerController @Autowired constructor(val urlShortenerService: UrlShortenerService) {
+
     @RequestMapping(value = ["/shortener"], method = [RequestMethod.POST], consumes = ["application/json"])
     @Throws(Exception::class)
     fun shortenUrl(@RequestBody @Valid shortenRequest: ShortenRequest, request: HttpServletRequest): String {
@@ -37,7 +38,7 @@ class UrlShortenerController @Autowired constructor(val urlShortenerService: Url
         redirectView.url = redirectUrlString
         return redirectView
     }
-
+    
     companion object {
         private val logger: Logger = LoggerFactory.getLogger(UrlShortenerController::class.java)
     }

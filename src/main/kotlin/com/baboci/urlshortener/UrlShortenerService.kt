@@ -22,7 +22,6 @@ class UrlShortenerService @Autowired constructor(private val urlRepository: UrlR
     @Throws(Exception::class)
     fun getLongURLFromID(uniqueID: String?): String {
         val dictionaryKey = getDictionaryKeyFromUniqueID(uniqueID!!)
-        println("dictionaryKey: $dictionaryKey")
         val longUrl = urlRepository.getUrl(dictionaryKey)
         logger.info("Converting shortened URL back to {}", longUrl)
         return longUrl
@@ -30,7 +29,6 @@ class UrlShortenerService @Autowired constructor(private val urlRepository: UrlR
 
     private fun formatLocalURLFromShortener(localURL: String): String {
         val addressComponents: List<String> = localURL.split("/".toRegex())
-        // remove the endpoint (last index)
         val sb = StringBuilder()
         for (i in 0 until addressComponents.size - 1) {
             sb.append(addressComponents[i])
